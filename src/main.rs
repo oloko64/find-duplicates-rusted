@@ -14,7 +14,7 @@ pub struct File {
 fn main() {
     let mut args: Vec<String> = env::args().collect();
     if args.len() < 2{
-        println!("\nPath not provided, analyzing current directory...\n");
+        println!("\nPath not provided, analyzing current directory...");
         args.push(String::from("."));
     }
     let path = &args[1];
@@ -46,7 +46,7 @@ fn get_files_recursive(base_path: &str) -> Vec<String> {
 
 fn output_duplicate_files(mut duplicates: Vec<File>) {
     if duplicates.is_empty() {
-        println!("No duplicates found");
+        println!("No duplicates found\n");
         return;
     }
     duplicates.sort_by(|a, b| a.hash.cmp(&b.hash));
