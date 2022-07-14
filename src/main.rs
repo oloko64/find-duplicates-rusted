@@ -5,7 +5,7 @@ use rayon::prelude::*;
 use prettytable::Table;
 #[macro_use] extern crate prettytable;
 
-#[derive(Debug, Clone)]
+#[derive(Clone)]
 pub struct File {
     pub path: String,
     pub hash: String
