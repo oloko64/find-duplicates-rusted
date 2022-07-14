@@ -1,6 +1,6 @@
 
 use walkdir::WalkDir;
-use std::{fs, env};
+use std::{fs, env, fmt::Write as _};
 use rayon::prelude::*;
 use prettytable::Table;
 #[macro_use] extern crate prettytable;
@@ -64,7 +64,7 @@ fn output_duplicate_files(mut duplicates: Vec<File>) {
 fn bytes_to_string(bytes: &[u8; 16]) -> String {
     let mut string = String::new();
     for byte in bytes {
-        string.push_str(&format!("{:x}", byte));
+        let _ = write!(string, "{:x}", byte);
     }
     string
 }
