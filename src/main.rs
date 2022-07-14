@@ -53,7 +53,6 @@ fn output_duplicate_files(mut duplicates: Vec<File>) {
     table.add_row(row!["FILE PATH", "FILE HASH"]);
 
     println!();
-    println!("File Path |Duplicate Path");
     for entry in duplicates {
         table.add_row(row![entry.path, entry.hash]);
     }
