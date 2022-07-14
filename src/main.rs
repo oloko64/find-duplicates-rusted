@@ -53,11 +53,16 @@ fn output_duplicate_files(mut duplicates: Vec<File>) {
     table.add_row(row!["FILE PATH", "FILE HASH"]);
 
     println!();
-    for entry in duplicates {
+    let mut last_hash_row = String::new();
+    for entry in &duplicates {
+        if entry.hash != last_hash_row && !last_hash_row.is_empty(){
+            table.add_row(row!["", ""]);
+        }
         table.add_row(row![entry.path, entry.hash]);
+        last_hash_row = entry.hash.clone();
     }
     table.printstd();
-    println!();
+    println!("\nDuplicates found: {}\n", duplicates.len());
 }
 
 fn bytes_to_string(bytes: &[u8; 16]) -> String {
