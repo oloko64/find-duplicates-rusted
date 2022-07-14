@@ -50,7 +50,7 @@ fn output_duplicate_files(mut duplicates: Vec<File>) {
     }
     duplicates.sort_by(|a, b| a.hash.cmp(&b.hash));
     let mut table = Table::new();
-    table.add_row(row!["FILE PATH", "FILE HASH"]);
+    table.add_row(row!["FILE PATH", "FILE HASH MD5"]);
 
     println!();
     let mut last_hash_row = String::new();
