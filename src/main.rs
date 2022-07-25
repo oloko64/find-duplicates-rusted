@@ -21,12 +21,12 @@ fn main() {
     println!("\nAnalyzing {}...\n", path);
     let file_list = get_files_recursive(path);
     let hashed_files: Vec<File> = file_list.par_iter().map(|file| get_hash_file(file)).collect();
-    output_duplicate_files(get_duplicates(hashed_files));
+    output_duplicate_files(&mut get_duplicates(&hashed_files));
 }
 
-fn get_duplicates(hashed_files: Vec<File>) -> Vec<File> {
+fn get_duplicates(hashed_files: &Vec<File>) -> Vec<File> {
     let mut duplicates: Vec<File> = Vec::new();
-    for file in &hashed_files {
+    for file in hashed_files {
         if hashed_files.par_iter().filter(|f| f.hash == file.hash).count() > 1 {
             duplicates.push(file.clone());
         }
@@ -44,7 +44,7 @@ fn get_files_recursive(base_path: &str) -> Vec<String> {
     files
 }
 
-fn output_duplicate_files(mut duplicates: Vec<File>) {
+fn output_duplicate_files(duplicates: &mut Vec<File>) {
     if duplicates.is_empty() {
         println!("No duplicates found\n");
         return;
@@ -55,7 +55,7 @@ fn output_duplicate_files(mut duplicates: Vec<File>) {
 
     println!();
     let mut last_hash_row = String::new();
-    for entry in &duplicates {
+    for entry in duplicates.clone() {
         if entry.hash != last_hash_row && !last_hash_row.is_empty(){
             table.add_row(row!["", ""]);
         }
