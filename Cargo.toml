@@ -1,11 +1,11 @@
 [package]
 name = "fdupes"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 
 [profile.release]
-lto = "thin"
-opt-level = "s"
+lto = true
+# opt-level = "s"
 strip = true # Only works on *nix systems
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -13,5 +13,5 @@ strip = true # Only works on *nix systems
 [dependencies]
 walkdir = "2.3.2"
 md5 = "0.7.0"
-rayon = "1.5.3"
-prettytable-rs = "0.8.0"
+rayon = "1.7.0"
+prettytable-rs = "0.10.0"
